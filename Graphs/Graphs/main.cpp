@@ -25,7 +25,7 @@ public:
         for(auto [vertex,edges]: adjList){
             cout<< vertex << ": [ ";
             for (auto edge: edges){
-                cout<< edge << " ";
+                cout<< edge << ", ";
             }
             cout<< "]" <<endl;
         }
@@ -39,6 +39,15 @@ public:
         }
         return false;
     }
+    
+    bool removeEdge(string vertex1, string vertex2){
+        if (adjList.count(vertex1)!= 0 && adjList.count(vertex2) != 0) {
+            adjList.at(vertex1).erase(vertex2);
+            adjList.at(vertex2).erase(vertex1);
+            return true;
+        }
+        return false;
+    }
 };
 
 int main(int argc, const char * argv[]) {
@@ -47,5 +56,11 @@ int main(int argc, const char * argv[]) {
     myGraph->addVertex("B");
     myGraph->addVertex("C");
     myGraph->addEdge("A","C");
+    myGraph->addEdge("A","B");
+    myGraph->addEdge("B","C");
+    myGraph->printGraph();
+    cout<< endl;
+    cout<< "---------------------------------"<<endl;
+    myGraph->removeEdge("A", "C");
     myGraph->printGraph();
 }

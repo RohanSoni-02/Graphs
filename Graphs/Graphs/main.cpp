@@ -48,6 +48,17 @@ public:
         }
         return false;
     }
+    
+    bool removeVertex(string vertex){
+        if (adjList.count(vertex) == 0) {
+            return false;
+        }
+        for(auto connectedVertex: adjList.at(vertex)){
+            adjList.at(connectedVertex).erase(vertex);
+        }
+        adjList.erase(vertex);
+        return true;
+    }
 };
 
 int main(int argc, const char * argv[]) {
@@ -61,6 +72,6 @@ int main(int argc, const char * argv[]) {
     myGraph->printGraph();
     cout<< endl;
     cout<< "---------------------------------"<<endl;
-    myGraph->removeEdge("A", "C");
+    myGraph->removeVertex("A");
     myGraph->printGraph();
 }
